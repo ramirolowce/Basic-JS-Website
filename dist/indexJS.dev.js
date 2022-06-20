@@ -16,7 +16,7 @@ function packsHTML() {
     for (var _iterator = packsJSON[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var pack = _step.value;
       var card = document.createElement("div");
-      card.innerHTML = "\n    \n\n    <div class=\"card\">\n    \n    <div class=\"card-body\">\n        <h5 class=\"card-title\">".concat(pack.precio, "</h5>\n        <p class=\"tituloCard card-text\">").concat(pack.nombre, "</p>\n        <p class=\"card-text\"><small class=\"text-muted\">").concat(pack.descripcion, "</small></p>\n        <div class=\"botones\">\n          <a id=\"conocer ").concat(pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Descubrir </a>\n          <a id=\"btn ").concat(pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Lo quiero! </a>\n        </div>\n    </div>\n</div>\n    ");
+      card.innerHTML = "\n    \n\n    <div class=\"card\">\n    \n    <div class=\"card-body\">\n        <h5 class=\"card-title\">$".concat(pack.precio, "</h5>\n        <p class=\"tituloCard card-text\">").concat(pack.nombre, "</p>\n        <p class=\"card-text\"><small class=\"text-muted\">").concat(pack.descripcion, "</small></p>\n        <div class=\"botones\">\n          <a id=\"conocer ").concat(pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Descubrir </a>\n          <a id=\"btn ").concat(pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Lo quiero! </a>\n        </div>\n    </div>\n</div>\n    ");
       container.appendChild(card);
     }
   } catch (err) {
@@ -86,7 +86,8 @@ function agregarAlCarrito(packCompra) {
     title: "Su Pack ha sido agregado al carrito!",
     showConfirmButton: false,
     timer: 1500
-  }); // Mantener el carrito limpio
+  });
+  document.getElementById("precioTotal").innerHTML = "\n  <h2>Total: ".concat(calcularTotal(), "</h2>\n  "); // Mantener el carrito limpio
 
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
@@ -97,7 +98,6 @@ function mostrarPack(pack) {
     html: "\n    <table class=\"table\">\n  <thead>\n    <tr>\n      <th scope=\"col\"></th>\n      <th scope=\"col\"></th>\n      <th scope=\"col\"></th>\n      <th scope=\"col\"></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th scope=\"row\">Sitio web:</th>\n      <td>".concat(pack.web, "</td>\n    </tr>\n    <tr>\n      <th scope=\"row\">Disponibilidad:</th>\n      <td>").concat(pack.disponibilidad, "</td>\n    </tr>\n    <tr>\n      <th scope=\"row\">Mantenimiento mensual:</th>\n      <td>").concat(pack.mantenimiento, "</td>\n    </tr>\n  </tbody>\n</table>\n    \n    \n    \n   \n\n    "),
     confirmButtonText: "Cerrar"
   });
-  document.getElementById("precioTotal").innerHTML = "\n  <h2>Total: ".concat(calcularTotal(), "</h2>\n  ");
 }
 
 function calcularTotal() {

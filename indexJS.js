@@ -20,7 +20,7 @@ function packsHTML() {
     <div class="card">
     
     <div class="card-body">
-        <h5 class="card-title">${pack.precio}</h5>
+        <h5 class="card-title">$${pack.precio}</h5>
         <p class="tituloCard card-text">${pack.nombre}</p>
         <p class="card-text"><small class="text-muted">${pack.descripcion}</small></p>
         <div class="botones">
@@ -80,6 +80,9 @@ function agregarAlCarrito(packCompra) {
     showConfirmButton: false,
     timer: 1500,
   });
+  document.getElementById("precioTotal").innerHTML = `
+  <h2>Total: ${calcularTotal()}</h2>
+  `;
   // Mantener el carrito limpio
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
@@ -121,9 +124,7 @@ function mostrarPack(pack) {
     `,
     confirmButtonText: "Cerrar",
   });
-  document.getElementById("precioTotal").innerHTML = `
-  <h2>Total: ${calcularTotal()}</h2>
-  `;
+  
 }
 
 function calcularTotal(){
