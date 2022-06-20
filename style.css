@@ -1,6 +1,44 @@
 img {
     height: 40px;
 }
+
+.type{
+    color: mediumseagreen;
+}
+.inicio{
+    background-color: black;
+    color: aliceblue;
+}
+#titulo{
+    color: white;
+    display: table;
+    padding-top: 300px;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: rgb(255 255 255) !important;
+}
+
+.nav-link {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: rgb(0 0 0 / 55%) !important;
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+
+
+.fotoCard{
+    width: 564px;
+    height: 791px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .centrado {
     text-align: center;
     margin-top: 2%;
@@ -13,6 +51,7 @@ img {
 
 .row {
     padding: 5%;
+    margin-right: 0%!important;
 }
 
 .btn-primary {

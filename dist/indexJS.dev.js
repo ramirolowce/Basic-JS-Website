@@ -1,6 +1,14 @@
 "use strict";
 
-//Productos JSON
+//Typed.js
+var typed = new Typed('.type', {
+  strings: ['Developer.', 'Freelancer.', 'Student.'],
+  typeSpeed: 75,
+  backSpeed: 75,
+  loop: true,
+  smartbackspace: true
+}); //Productos JSON
+
 var productosJSON = []; //Carro
 
 var carrito = [];
