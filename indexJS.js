@@ -150,8 +150,8 @@ function calcularTotal(){
 }
 
 obtenerJSON();
-packsHTML();
-agregarAlCarrito();
+packsHTML(packsJSON);
+agregarAlCarrito(packCompra);
 mostrarPack();
 calcularTotal();
 
