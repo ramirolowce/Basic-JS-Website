@@ -1,8 +1,8 @@
 [
     {
-      "id": 1,
+      "id": "1",
       "nombre": " Pack Silver ",
-      "precio": 40,
+      "precio": "40",
       "descripcion": "Sitio web con 2 paginas",
       "disponibilidad": "Disponible",
       "mantenimiento": "NO",
@@ -11,9 +11,9 @@
     },
   
     {
-      "id": 2,
+      "id": "2",
       "nombre": " Pack Premium ",
-      "precio": 80,
+      "precio": "80",
       "descripcion": "Sitio web con 4 paginas",
       "disponibilidad": "Disponible",
       "mantenimiento": "SI",
@@ -22,9 +22,9 @@
     },
   
     {
-      "id": 3,
+      "id": "3",
       "nombre": " Pack Gold ",
-      "precio": 120,
+      "precio": "120",
       "descripcion": "Sitio web con 6 paginas",
       "disponibilidad": "Disponible",
       "mantenimiento": "SI",

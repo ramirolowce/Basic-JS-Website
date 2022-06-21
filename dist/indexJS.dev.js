@@ -1,6 +1,6 @@
 "use strict";
 
-//Typed.js
+//Typed.js 
 var typed = new Typed('.type', {
   strings: ['Developer.', 'Freelancer.', 'Student.'],
   typeSpeed: 75,
@@ -12,7 +12,35 @@ var typed = new Typed('.type', {
 var productosJSON = []; //Carro
 
 var carrito = [];
-var listaCarrito = document.getElementById("listaCarrito"); //Creacion de Cards
+var listaCarrito = document.getElementById("listaCarrito"); //Obtener JSON
+
+function obtenerJSON() {
+  var URLJSON, respuesta, data, packsJSON;
+  return regeneratorRuntime.async(function obtenerJSON$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          URLJSON = '/packs.json';
+          _context.next = 3;
+          return regeneratorRuntime.awrap(fetch(URLJSON));
+
+        case 3:
+          respuesta = _context.sent;
+          _context.next = 6;
+          return regeneratorRuntime.awrap(respuesta.json());
+
+        case 6:
+          data = _context.sent;
+          packsJSON = data;
+
+        case 8:
+        case "end":
+          return _context.stop();
+      }
+    }
+  });
+} //Creacion de Cards
+
 
 function packsHTML() {
   var container = document.getElementById("creacionCards");
@@ -51,35 +79,6 @@ function packsHTML() {
     document.getElementById("conocer ".concat(pack.id)).addEventListener("click", function () {
       mostrarPack(pack);
     });
-  });
-} //Obtener JSON
-
-
-function obtenerJSON() {
-  var URLJSON, respuesta, data;
-  return regeneratorRuntime.async(function obtenerJSON$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          URLJSON = "/packs.json";
-          _context.next = 3;
-          return regeneratorRuntime.awrap(fetch(URLJSON));
-
-        case 3:
-          respuesta = _context.sent;
-          _context.next = 6;
-          return regeneratorRuntime.awrap(respuesta.json());
-
-        case 6:
-          data = _context.sent;
-          packsJSON = data;
-          packsHTML();
-
-        case 9:
-        case "end":
-          return _context.stop();
-      }
-    }
   });
 } //Agregar packs al carrito
 
@@ -138,6 +137,7 @@ function calcularTotal() {
 }
 
 obtenerJSON();
+packsHTML();
 agregarAlCarrito();
 mostrarPack();
 calcularTotal(); //Fin de codigo
