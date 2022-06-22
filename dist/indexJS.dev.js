@@ -12,47 +12,19 @@ var typed = new Typed('.type', {
 var productosJSON = []; //Carro
 
 var carrito = [];
-var listaCarrito = document.getElementById("listaCarrito"); //Obtener JSON
+var listaCarrito = document.getElementById("listaCarrito"); //Creacion de Cards
 
-function obtenerJSON() {
-  var URLJSON, respuesta, data, packsJSON;
-  return regeneratorRuntime.async(function obtenerJSON$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          URLJSON = '/packs.json';
-          _context.next = 3;
-          return regeneratorRuntime.awrap(fetch(URLJSON));
-
-        case 3:
-          respuesta = _context.sent;
-          _context.next = 6;
-          return regeneratorRuntime.awrap(respuesta.json());
-
-        case 6:
-          data = _context.sent;
-          packsJSON = data;
-
-        case 8:
-        case "end":
-          return _context.stop();
-      }
-    }
-  });
-} //Creacion de Cards
-
-
-function packsHTML() {
+function packsHTML(pack) {
   var container = document.getElementById("creacionCards");
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
 
   try {
-    for (var _iterator = packsJSON[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var pack = _step.value;
+    for (var _iterator = pack[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var _pack = _step.value;
       var card = document.createElement("div");
-      card.innerHTML = "\n    \n\n    <div class=\"card\">\n    \n    <div class=\"card-body\">\n        <h5 class=\"card-title\">$".concat(pack.precio, "</h5>\n        <p class=\"tituloCard card-text\">").concat(pack.nombre, "</p>\n        <p class=\"card-text\"><small class=\"text-muted\">").concat(pack.descripcion, "</small></p>\n        <div class=\"botones\">\n          <a id=\"conocer ").concat(pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Descubrir </a>\n          <a id=\"btn ").concat(pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Lo quiero! </a>\n        </div>\n    </div>\n</div>\n    ");
+      card.innerHTML = "\n    \n\n    <div class=\"card\">\n    \n    <div class=\"card-body\">\n        <h5 class=\"card-title\">$".concat(_pack.precio, "</h5>\n        <p class=\"tituloCard card-text\">").concat(_pack.nombre, "</p>\n        <p class=\"card-text\"><small class=\"text-muted\">").concat(_pack.descripcion, "</small></p>\n        <div class=\"botones\">\n          <a id=\"conocer ").concat(_pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Descubrir </a>\n          <a id=\"btn ").concat(_pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Lo quiero! </a>\n        </div>\n    </div>\n</div>\n    ");
       container.appendChild(card);
     }
   } catch (err) {
@@ -79,6 +51,35 @@ function packsHTML() {
     document.getElementById("conocer ".concat(pack.id)).addEventListener("click", function () {
       mostrarPack(pack);
     });
+  });
+} //Obtener JSON
+
+
+function obtenerJSON() {
+  var URLJSON, respuesta, data, packsJSON;
+  return regeneratorRuntime.async(function obtenerJSON$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          URLJSON = "/packs.json";
+          _context.next = 3;
+          return regeneratorRuntime.awrap(fetch(URLJSON));
+
+        case 3:
+          respuesta = _context.sent;
+          _context.next = 6;
+          return regeneratorRuntime.awrap(respuesta.json());
+
+        case 6:
+          data = _context.sent;
+          packsJSON = data;
+          packsHTML(packsJSON);
+
+        case 9:
+        case "end":
+          return _context.stop();
+      }
+    }
   });
 } //Agregar packs al carrito
 
@@ -137,7 +138,7 @@ function calcularTotal() {
 }
 
 obtenerJSON();
-packsHTML(packsJSON);
-agregarAlCarrito(packCompra);
+packsHTML();
+agregarAlCarrito();
 mostrarPack();
 calcularTotal(); //Fin de codigo

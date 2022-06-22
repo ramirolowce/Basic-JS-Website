@@ -1,5 +1,3 @@
-
-
 //Typed.js 
 var typed = new Typed('.type', {
   strings: [
@@ -22,20 +20,11 @@ let carrito = [];
 let listaCarrito = document.getElementById("listaCarrito");
 
 
-//Obtener JSON
-async function obtenerJSON() {
-  const URLJSON = '/packs.json';	
-  const respuesta = await fetch(URLJSON);
-  const data = await respuesta.json();
-  const packsJSON = data;
-}
-
-
 //Creacion de Cards
-function packsHTML() {
+function packsHTML(pack) {
   let container = document.getElementById("creacionCards");
 
-  for (const pack of packsJSON) {
+  for (const pack of pack) {
     let card = document.createElement("div");
 
     card.innerHTML = `
@@ -73,6 +62,16 @@ function packsHTML() {
         mostrarPack(pack);
       });
   });
+}
+
+
+//Obtener JSON
+async function obtenerJSON() {
+  const URLJSON = "/packs.json";	
+  const respuesta = await fetch(URLJSON);
+  const data = await respuesta.json();
+  const packsJSON = data;
+  packsHTML(packsJSON);
 }
 
 
@@ -150,8 +149,8 @@ function calcularTotal(){
 }
 
 obtenerJSON();
-packsHTML(packsJSON);
-agregarAlCarrito(packCompra);
+packsHTML();
+agregarAlCarrito();
 mostrarPack();
 calcularTotal();
 
