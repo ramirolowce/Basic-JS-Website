@@ -9,16 +9,21 @@ let listaCarrito = document.getElementById("listaCarrito");
 
 //Obtener JSON
 async function obtenerJSON() {
-  const URLJSON = "/packs.json";	
+  const URLJSON = "/packs.json";
   const respuesta = await fetch(URLJSON);
   const data = await respuesta.json();
-  console.log(data);
+  console.log("DATA", data);
   return data;
 }
-obtenerJSON();
-const packsJSON = obtenerJSON();
 
+let packsJSON;
 
+const getPacks = async () => {
+  packsJSON = await obtenerJSON()
+  packsHTML(packsJSON);
+}
+
+getPacks()
 
 //Creacion de Cards
 function packsHTML(packsJSON) {
@@ -28,26 +33,27 @@ function packsHTML(packsJSON) {
     let card = document.createElement("div");
 
     card.innerHTML = `
-    
-
-    <div class="card">
-    
-    <div class="card-body">
-        <h5 class="card-title">$${pack.precio}</h5>
-        <p class="tituloCard card-text">${pack.nombre}</p>
-        <p class="card-text"><small class="text-muted">${pack.descripcion}</small></p>
-        <div class="botones">
-          <a id="conocer ${pack.id}" href="#" class="btn btn-primary"> Descubrir </a>
-          <a id="btn ${pack.id}" href="#" class="btn btn-primary"> Lo quiero! </a>
-        </div>
-    </div>
-</div>
-    `;
+      <div class="card">
+      
+      <div class="card-body">
+          <h5 class="card-title">$${pack.precio}</h5>
+          <p class="tituloCard card-text">${pack.nombre}</p>
+          <p class="card-text"><small class="text-muted">${pack.descripcion}</small></p>
+          <div class="botones">
+            <a id="conocer ${pack.id}" href="#" class="btn btn-primary"> Descubrir </a>
+            <a id="btn ${pack.id}" href="#" class="btn btn-primary"> Lo quiero! </a>
+          </div>
+      </div>
+  </div>
+      `;
 
     container.appendChild(card);
   }
 
-  packsJSON.forEach((pack) => {
+
+  let packJSON = packsJSON;
+
+  packJSON.forEach((pack) => {
     document
       .getElementById(`btn ${pack.id}`)
       .addEventListener("click", function () {
@@ -55,7 +61,7 @@ function packsHTML(packsJSON) {
       });
   });
 
-  packsJSON.forEach((pack) => {
+  packJSON.forEach((pack) => {
     document
       .getElementById(`conocer ${pack.id}`)
       .addEventListener("click", function () {
@@ -120,29 +126,16 @@ function mostrarPack(pack) {
     </tr>
   </tbody>
 </table>
-    
-    
-    
-   
-
     `,
     confirmButtonText: "Cerrar",
   });
-  
+
 }
 
-function calcularTotal(){
-  let suma= 0;
-  for(const pack of carrito){
+function calcularTotal() {
+  let suma = 0;
+  for (const pack of carrito) {
     suma = suma + (pack.precio * 1);
   }
   return suma;
 }
-
-obtenerJSON();
-packsHTML(packsJSON);
-agregarAlCarrito();
-mostrarPack();
-calcularTotal();
-
-//Fin de codigo
