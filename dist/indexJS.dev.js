@@ -1,30 +1,53 @@
 "use strict";
 
-//Typed.js 
-var typed = new Typed('.type', {
-  strings: ['Developer.', 'Freelancer.', 'Student.'],
-  typeSpeed: 75,
-  backSpeed: 75,
-  loop: true,
-  smartbackspace: true
-}); //Productos JSON
-
+//Productos JSON
 var productosJSON = []; //Carro
 
 var carrito = [];
-var listaCarrito = document.getElementById("listaCarrito"); //Creacion de Cards
+var listaCarrito = document.getElementById("listaCarrito"); //Obtener JSON
 
-function packsHTML(pack) {
+function obtenerJSON() {
+  var URLJSON, respuesta, data;
+  return regeneratorRuntime.async(function obtenerJSON$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          URLJSON = "/packs.json";
+          _context.next = 3;
+          return regeneratorRuntime.awrap(fetch(URLJSON));
+
+        case 3:
+          respuesta = _context.sent;
+          _context.next = 6;
+          return regeneratorRuntime.awrap(respuesta.json());
+
+        case 6:
+          data = _context.sent;
+          console.log(data);
+          return _context.abrupt("return", data);
+
+        case 9:
+        case "end":
+          return _context.stop();
+      }
+    }
+  });
+}
+
+obtenerJSON();
+var packsJSON = obtenerJSON(); //Creacion de Cards
+
+function packsHTML(packsJSON) {
   var container = document.getElementById("creacionCards");
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
 
   try {
-    for (var _iterator = pack[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _pack = _step.value;
+    for (var _iterator = packsJSON[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var pack = _step.value;
       var card = document.createElement("div");
-      card.innerHTML = "\n    \n\n    <div class=\"card\">\n    \n    <div class=\"card-body\">\n        <h5 class=\"card-title\">$".concat(_pack.precio, "</h5>\n        <p class=\"tituloCard card-text\">").concat(_pack.nombre, "</p>\n        <p class=\"card-text\"><small class=\"text-muted\">").concat(_pack.descripcion, "</small></p>\n        <div class=\"botones\">\n          <a id=\"conocer ").concat(_pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Descubrir </a>\n          <a id=\"btn ").concat(_pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Lo quiero! </a>\n        </div>\n    </div>\n</div>\n    ");
+      card.innerHTML = "\n    \n\n    <div class=\"card\">\n    \n    <div class=\"card-body\">\n        <h5 class=\"card-title\">$".concat(pack.precio, "</h5>\n        <p class=\"tituloCard card-text\">").concat(pack.nombre, "</p>\n        <p class=\"card-text\"><small class=\"text-muted\">").concat(pack.descripcion, "</small></p>\n        <div class=\"botones\">\n          <a id=\"conocer ").concat(pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Descubrir </a>\n          <a id=\"btn ").concat(pack.id, "\" href=\"#\" class=\"btn btn-primary\"> Lo quiero! </a>\n        </div>\n    </div>\n</div>\n    ");
       container.appendChild(card);
     }
   } catch (err) {
@@ -51,35 +74,6 @@ function packsHTML(pack) {
     document.getElementById("conocer ".concat(pack.id)).addEventListener("click", function () {
       mostrarPack(pack);
     });
-  });
-} //Obtener JSON
-
-
-function obtenerJSON() {
-  var URLJSON, respuesta, data, packsJSON;
-  return regeneratorRuntime.async(function obtenerJSON$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          URLJSON = "/packs.json";
-          _context.next = 3;
-          return regeneratorRuntime.awrap(fetch(URLJSON));
-
-        case 3:
-          respuesta = _context.sent;
-          _context.next = 6;
-          return regeneratorRuntime.awrap(respuesta.json());
-
-        case 6:
-          data = _context.sent;
-          packsJSON = data;
-          packsHTML(packsJSON);
-
-        case 9:
-        case "end":
-          return _context.stop();
-      }
-    }
   });
 } //Agregar packs al carrito
 
@@ -138,7 +132,7 @@ function calcularTotal() {
 }
 
 obtenerJSON();
-packsHTML();
+packsHTML(packsJSON);
 agregarAlCarrito();
 mostrarPack();
 calcularTotal(); //Fin de codigo
